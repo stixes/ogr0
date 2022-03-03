@@ -1,0 +1,11 @@
+version: "2.4"
+
+services:
+  go0r:
+    build: .
+
+  sut:
+    image: alpine
+    depends_on:
+      - go0r
+    command: sh -c "set -e;nc -v -w 1 go0r 2222|grep -q 'SSH-2.0-'"
